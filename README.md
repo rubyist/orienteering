@@ -9,21 +9,31 @@ Drop the file orienteering.rb into your plugins directory.
 
 ## Usage
 Setting a personal waypoint:
+
 ```
 /wp set <name>
 ```
 
+Setting a global waypoint:
+
+```
+/wp gset <name>
+```
+
 Teleporting to a waypoint:
+
 ```
 /wp go <name>
 ```
 
 Removing a waypoint:
+
 ```
 /wp delete <name>
 ```
 
-Listing your waypoints:
+Listing waypoints:
+
 ```
 /wp list
 ```
@@ -35,7 +45,6 @@ Listing your waypoints:
 
 
 ## TODO
-- global waypoints
 - Permissions
 
 

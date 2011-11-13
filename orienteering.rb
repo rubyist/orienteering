@@ -11,14 +11,22 @@ class OrienteeringPlugin
         loc = player.location
         config.set!("#{player.name}.waypoints.#{name}", "#{player.world.name}:#{loc.x},#{loc.y},#{loc.z}")
         player.msg colorize("{green}Set waypoint #{name}")
+      when 'gset'
+        loc = player.location
+        config.set!("__global.waypoints.#{name}", "#{player.world.name}:#{loc.x},#{loc.y},#{loc.z}")
+        player.msg colorize("{green}Set global waypiont #{name}")
       when 'list'
+        locs = config.get("__global.waypoints")
+        player.msg colorize("{blue}Global waypoints:")
+        locs.each { |name, loc| player.msg colorize("   {blue}* #{name}") }
+
         locs = config.get("#{player.name}.waypoints")
         player.msg colorize("{blue}Your waypoints:")
         locs.each { |name, loc| player.msg colorize("   {blue}* #{name}") }
       when 'delete'
         config.remove!("#{player.name}.waypoints.#{name}")
       when 'go'
-        loc = config.get("#{player.name}.waypoints.#{name}")
+        loc = config.get("#{player.name}.waypoints.#{name}") || config.get("__global.waypoints.#{name}")
         if loc
           world, points = loc.split(':')
           x, y, z = points.split(',').map(&:to_f)
