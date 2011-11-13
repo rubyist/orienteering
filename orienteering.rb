@@ -17,12 +17,16 @@ class OrienteeringPlugin
         player.msg colorize("{green}Set global waypiont #{name}")
       when 'list'
         locs = config.get("__global.waypoints")
-        player.msg colorize("{blue}Global waypoints:")
-        locs.each { |name, loc| player.msg colorize("   {blue}* #{name}") }
+        if locs && !locs.empty?
+          player.msg colorize("{blue}Global waypoints:")
+          locs.each { |name, loc| player.msg colorize("   {blue}* #{name}") }
+        end
 
         locs = config.get("#{player.name}.waypoints")
-        player.msg colorize("{blue}Your waypoints:")
-        locs.each { |name, loc| player.msg colorize("   {blue}* #{name}") }
+        if locs && !locs.empty?
+          player.msg colorize("{blue}Your waypoints:")
+          locs.each { |name, loc| player.msg colorize("   {blue}* #{name}") }
+        end
       when 'delete'
         config.remove!("#{player.name}.waypoints.#{name}")
       when 'go'
