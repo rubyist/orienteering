@@ -3,8 +3,11 @@ class OrienteeringPlugin
   description "Orienteering", 0.1
 
   def on_enable
-    player_command('wp', 'waypoints', '/wp set') do |player, *args|
+    player_command('wp', 'waypoints', '/wp <cmd> <name>') do |player, *args|
       command, name = args
+      if command != 'list'
+        error? name, "Must specify a waypoint name."
+      end
 
       case command
       when 'set'
